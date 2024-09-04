@@ -3,7 +3,7 @@ module github.com/15226124477/coord
 go 1.22.0
 
 require (
-	github.com/15226124477/method v0.0.0-20240904083959-95e7ce9ae779
+	github.com/15226124477/method v0.0.0-20240904094333-acb1369fe20e
 	github.com/sirupsen/logrus v1.9.3
 )
 
