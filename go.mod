@@ -1,14 +1,14 @@
 module github.com/15226124477/coord
 
-go 1.22.0
+go 1.23.0
 
 require (
-	github.com/15226124477/method v0.0.0-20240904094333-acb1369fe20e
+	github.com/15226124477/method v0.0.0-20240905054337-37167fe16ab4
 	github.com/sirupsen/logrus v1.9.3
 )
 
 require (
-	github.com/15226124477/define v0.0.0-20240904082743-4f6142f465f8 // indirect
+	github.com/15226124477/define v0.0.0-20240904090259-ef1913ec436a // indirect
 	github.com/bytedance/sonic v1.11.6 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
@@ -21,7 +21,6 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.20.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
-	github.com/hpcloud/tail v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
@@ -37,7 +36,5 @@ require (
 	golang.org/x/sys v0.20.0 // indirect
 	golang.org/x/text v0.15.0 // indirect
 	google.golang.org/protobuf v1.34.1 // indirect
-	gopkg.in/fsnotify.v1 v1.4.7 // indirect
-	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
