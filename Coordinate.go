@@ -20,9 +20,10 @@ type CoordinateNEZ struct {
 
 // CoordinateBLH BLH坐标
 type CoordinateBLH struct {
-	B float64
-	L float64
-	H float64
+	B  float64
+	L  float64
+	H  float64
+	L0 float64 // 中央经线
 }
 
 // CoordinateXYZ XYZ坐标
@@ -147,6 +148,7 @@ func (pos *Coordinate) Convert() {
 	switch pos.ConvertBefore {
 	case NEZ:
 		// Next
+		pos.NEZ2BLH()
 	case XYZ:
 		pos.XYZ2BLH()
 		pos.BLH2NEZ()
@@ -155,6 +157,58 @@ func (pos *Coordinate) Convert() {
 		pos.BLH2NEZ()
 		pos.CoordinateNEZ.Z = pos.CoordinateBLH.H
 	}
+}
+
+func (pos *Coordinate) NEZ2BLH() {
+	x := pos.N
+	y := pos.E
+	a := 6378137.0
+	f := 1 / 298.257223563
+	//double width = 3;
+	L0 := pos.L0
+	y = y - 500000
+	b := a * (1 - f)
+	c := a * a / b
+	e2 := (a*a - b*b) / (a * a)
+	e4 := (a*a - b*b) / (b * b)
+
+	m0 := a * (1 - e2)
+	m2 := 3 / 2.0 * e2 * m0
+	m4 := 5 / 4.0 * e2 * m2
+	m6 := 7 / 6.0 * e2 * m4
+	m8 := 9 / 8.0 * e2 * m6
+
+	a0 := m0 + 1/2.0*m2 + 3/8.0*m4 + 5/16.0*m6 + 35/128.0*m8
+	a2 := 1/2.0*m2 + 1/2.0*m4 + 15/32.0*m6 + 7/16.0*m8
+	a4 := 1/8.0*m4 + 3/16.0*m6 + 7/32.0*m8
+	a6 := 1/32.0*m6 + 1/16.0*m8
+	a8 := 1 / 128.0 * m8
+	//初值
+	Bf0 := x / a0
+	Bf := Bf0
+
+	for {
+		last_Bf := Bf
+		Bf = 1 / a0 * (x + a2/2*math.Sin(2*Bf) - a4/4*math.Sin(4*Bf) + a6/6*math.Sin(6*Bf) - a8/8*math.Sin(8*Bf))
+		if math.Abs(Bf-last_Bf) <= 5e-10 {
+			break
+		}
+	}
+
+	tf := math.Tan(Bf)
+	nf2 := e4 * math.Pow(math.Cos(Bf), 2)
+	Vf := math.Sqrt(1 + e4*math.Pow(math.Cos(Bf), 2))
+	Nf := c / Vf
+	Mf := c / math.Pow(Vf, 3)
+	B := Bf - tf/(2*Mf*Nf)*y*y + tf/(24*Mf*math.Pow(Nf, 3))*(5+3*tf*tf+nf2-9*nf2*tf*tf)*math.Pow(y, 4) - tf/(720*Mf*math.Pow(Nf, 5))*(61+90*tf*tf+45*math.Pow(tf, 4))*math.Pow(y, 6)
+	L := 1/(Nf*math.Cos(Bf))*y - 1/(6*math.Pow(Nf, 3)*math.Cos(Bf))*(1+2*tf*tf+nf2)*math.Pow(y, 3) + 1/(120*math.Pow(Nf, 5)*math.Cos(Bf))*(5+28*tf*tf+24*math.Pow(tf, 4)+6*nf2+8*nf2*tf*tf)*math.Pow(y, 5)
+	B = B * 180 / math.Pi
+	L = L*180/math.Pi + float64(L0)
+
+	pos.B = B
+	pos.L = L
+	pos.H = pos.CoordinateNEZ.Z
+
 }
 
 func (pos *Coordinate) Value() {

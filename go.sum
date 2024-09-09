@@ -2,6 +2,8 @@ github.com/15226124477/define v0.0.0-20240904090259-ef1913ec436a h1:6Z9Pk1AahJDF
 github.com/15226124477/define v0.0.0-20240904090259-ef1913ec436a/go.mod h1:eWHClafAf49vElyhKijmUNBv9pkigvZUUsAYyi5fIVY=
 github.com/15226124477/method v0.0.0-20240905054337-37167fe16ab4 h1:Ns/Ra22Bopk38Kmyzz7sNvrCwZIK1YOfuoSkVepaOho=
 github.com/15226124477/method v0.0.0-20240905054337-37167fe16ab4/go.mod h1:guC3Y4mUZcjmyu1gvdd2qoFDtkBqmBQ6RCfRsCLGoVs=
+github.com/15226124477/method v0.0.0-20240914034949-7c31aeead8a5 h1:vLnnI64njLIOizgz/KkXot3foi0i1nSENCcJUDlHWWY=
+github.com/15226124477/method v0.0.0-20240914034949-7c31aeead8a5/go.mod h1:guC3Y4mUZcjmyu1gvdd2qoFDtkBqmBQ6RCfRsCLGoVs=
 github.com/bytedance/sonic v1.11.6 h1:oUp34TzMlL+OY1OUWxHqsdkgC/Zfc85zGqw9siXjrc0=
 github.com/bytedance/sonic v1.11.6/go.mod h1:LysEHSvpvDySVdC2f87zGWf6CIKJcAvqab1ZaiQtds4=
 github.com/bytedance/sonic/loader v0.1.1 h1:c+e5Pt1k/cy5wMveRDyk2X4B9hF4g7an8N3zCYjJFNM=
